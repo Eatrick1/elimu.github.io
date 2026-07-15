@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: replace with your real live domain once the site is deployed
+Sitemap: https://www.elimufoundationafrica.org/sitemap.xml

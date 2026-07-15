@@ -625,6 +625,42 @@ function applyLanguage(lang) {
   update();
 })();
 
+// ==========================================
+// PAGE HERO SLIDESHOW + ROTATING TEXT
+// ==========================================
+(function initPageHeroSlideshows() {
+  var containers = document.querySelectorAll('.page-hero-bg-slides');
+  containers.forEach(function(container) {
+    var slides = container.querySelectorAll('.page-hero-bg-slide');
+    if (!slides.length) return;
+    var section = container.closest('.page-hero');
+    var textWrap = section ? section.querySelector('.hero-rotating-text') : null;
+    var texts = [];
+    if (textWrap) {
+      textWrap.querySelectorAll('span').forEach(function(s) { texts.push(s.textContent); });
+      if (texts.length) {
+        textWrap.textContent = texts[0];
+      }
+    }
+    var current = 0;
+
+    setInterval(function() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+
+      if (textWrap && texts.length) {
+        var textIndex = current % texts.length;
+        textWrap.style.opacity = '0';
+        setTimeout(function() {
+          textWrap.textContent = texts[textIndex];
+          textWrap.style.opacity = '1';
+        }, 400);
+      }
+    }, 5000);
+  });
+})();
+
 // nav toggle
 var toggle = document.getElementById('navToggle');
 var navList = document.getElementById('navList');
