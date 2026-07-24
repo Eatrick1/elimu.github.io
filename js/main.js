@@ -728,6 +728,26 @@ window.filterGallery = function(cat, btn) {
   btn.classList.add('active');
 };
 
+// testimonies filter
+window.filterTestimonies = function(cat, btn) {
+  document.querySelectorAll('.test-card').forEach(function(item) {
+    var show = (cat === 'all' || item.dataset.cat === cat);
+    if (show) {
+      item.style.display = 'flex';
+      requestAnimationFrame(function() { item.classList.remove('card-hidden'); });
+    } else {
+      item.classList.add('card-hidden');
+      setTimeout(function() {
+        if (item.classList.contains('card-hidden')) item.style.display = 'none';
+      }, 320);
+    }
+  });
+  document.querySelectorAll('#testFilterRow .filter-btn').forEach(function(b) {
+    b.classList.remove('active');
+  });
+  btn.classList.add('active');
+};
+
 // form submit
 window.submitForm = function(btn) {
   btn.textContent = 'Sending...';

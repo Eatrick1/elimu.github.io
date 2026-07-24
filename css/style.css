@@ -890,6 +890,16 @@ nav ul li a.active::after {
   font-weight: 700;
   color: #E8720E;
   flex-shrink: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.t-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
 }
 
 .testimony.featured .t-avatar {
@@ -1389,18 +1399,37 @@ nav ul li a.active::after {
    ========================================== */
 
 .testimonies-masonry {
-  columns: 2;
-  column-gap: 22px;
-  margin-top: 48px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 22px;
+  margin-top: 32px;
 }
 
 .test-card {
-  break-inside: avoid;
   background: #fff;
   border: 1px solid #e8ceb0;
   border-radius: 4px;
   padding: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.22,1,0.36,1), box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.test-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 22px 44px rgba(20,40,25,0.14);
+  border-color: #E8720E;
+}
+
+.test-card.card-hidden {
+  opacity: 0;
+  transform: scale(0.92);
+  pointer-events: none;
+}
+
+.test-card p {
+  flex-grow: 1;
 }
 
 .test-card .cat-tag {
@@ -1943,7 +1972,7 @@ nav ul li a.active::after {
   .testimonies-grid { grid-template-columns: 1fr; }
   .big-nums { grid-template-columns: 1fr 1fr; }
   .program-blocks { grid-template-columns: 1fr; }
-  .testimonies-masonry { columns: 1; }
+  .testimonies-masonry { grid-template-columns: 1fr; }
   .gallery-grid { grid-template-columns: 1fr 1fr; }
   .gallery-item:first-child { grid-column: span 2; }
   .video-grid { grid-template-columns: 1fr 1fr; }
